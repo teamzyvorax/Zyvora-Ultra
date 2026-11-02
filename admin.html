@@ -1,6 +1,31 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#09090f"><title>ZYVORA Admin v2</title>
 <style>
 :root{--accent:#a855f7}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#55208055,transparent 35%),#09090f;color:#f5efff;font-family:Inter,system-ui,sans-serif}.top{position:sticky;top:0;z-index:4;background:#0b0912ee;backdrop-filter:blur(14px);border-bottom:1px solid #4b2670;padding:14px 4%;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:950;letter-spacing:3px;font-size:20px}.brand span{color:var(--accent)}.wrap{max-width:1200px;margin:26px auto;padding:0 18px}.layout{display:grid;grid-template-columns:190px 1fr;gap:18px}.nav,.card{background:#12101b;border:1px solid #39234f;border-radius:14px;padding:18px;box-shadow:0 12px 40px #0006}.nav{height:max-content;position:sticky;top:85px}.nav a{display:block;color:#d9c7f2;text-decoration:none;padding:11px;border-radius:8px;font-size:14px}.nav a:hover{background:#32134d}.card{margin-bottom:16px}.card h2{font-size:17px;margin:0 0 15px;color:#d9b5ff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field{display:flex;flex-direction:column;gap:7px;min-width:0}label{font-size:13px;color:#cbb7e8}input,textarea,select{width:100%;background:#090811;color:#fff;border:1px solid #49305f;border-radius:8px;padding:11px;font:inherit;min-width:0}textarea{min-height:105px;resize:vertical}.wide{grid-column:1/-1}.hint{font-size:12px;color:#a99ab9;line-height:1.6}.btn{border:1px solid #a855f7;background:#35105d;color:white;border-radius:9px;padding:11px 16px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}.secondary{background:#171321;border-color:#59416f}.danger{background:#351321;border-color:#87415e}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.notice{color:#9bf4c1;min-height:22px;margin-top:10px}.upload{border:1px dashed #7445a0;padding:12px;border-radius:10px}.thumb{max-width:100%;max-height:110px;object-fit:cover;border-radius:8px;margin-top:8px;display:none}.pill{display:inline-block;background:#2a1740;border:1px solid #59347c;border-radius:20px;padding:4px 9px;margin:3px;font-size:12px}.preview{border:1px solid #543277;border-radius:12px;padding:16px;background:linear-gradient(130deg,#251044,#10101a)}@media(max-width:760px){.layout{grid-template-columns:1fr}.nav{position:static;display:flex;overflow:auto;gap:3px;padding:8px}.nav a{white-space:nowrap}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.top{padding:12px 16px}}
+
+/* Layout fix: nav, cloud login and editor are three direct grid children. */
+.layout{grid-template-columns:190px minmax(0,1fr);align-items:start}
+.layout>.nav{grid-column:1;grid-row:1 / span 2;min-width:0}
+.layout>#cloudAuth,.layout>#editor{grid-column:2;grid-row:auto;width:100%;min-width:0;max-width:100%}
+#editor{min-width:0}
+#editor>.card{width:100%;min-width:0}
+.grid,.field{min-width:0}
+input,textarea,select{max-width:100%}
+@media(max-width:760px){
+ .layout{grid-template-columns:minmax(0,1fr);gap:12px}
+ .layout>.nav,.layout>#cloudAuth,.layout>#editor{grid-column:1;grid-row:auto;width:100%}
+ .layout>.nav{position:static;display:flex;overflow-x:auto;gap:3px;padding:8px}
+ .layout>.nav a{white-space:nowrap;flex:0 0 auto}
+ .layout>#editor{width:100%}
+ .grid{grid-template-columns:minmax(0,1fr)}
+ .wide{grid-column:1}
+ .top{padding:12px 16px}
+ .brand{font-size:16px;letter-spacing:2px}
+ .wrap{margin:16px auto;padding:0 12px}
+ .card,.nav{padding:14px}
+}
+@media(min-width:761px) and (max-width:1050px){
+ .layout{grid-template-columns:165px minmax(0,1fr);gap:14px}
+}
 </style></head><body><header class="top"><div class="brand">ZYVORA <span>ADMIN v2.0</span></div><a class="btn" href="index.html">View Profile ↗</a></header>
 <main class="wrap"><div class="layout"><nav class="nav"><a href="#identity">Profile Details</a><a href="#images">Images</a><a href="#sections">Sections</a><a href="#social">Social Links</a><a href="#style">Appearance</a><a href="#save">Save / Reset</a></nav><section class="card" id="cloudAuth"><h2>Secure Cloud Admin Login</h2><p class="hint">Sign in with your admin email. New account signup is available; an account must be approved in the database before it can edit the public profile.</p><div class="grid"><div class="field"><label>Email</label><input id="cloudEmail" type="email" autocomplete="username" required></div><div class="field"><label>Password</label><input id="cloudPassword" type="password" autocomplete="current-password" required></div></div><div class="actions"><button class="btn" id="cloudLogin" type="button">Sign in</button><button class="btn secondary" id="cloudSignup" type="button">Create account</button><button class="btn danger" id="cloudLogout" type="button" hidden>Sign out</button></div><div class="notice" id="cloudNotice" role="status"></div></section><form id="editor" style="display:none">
 <section class="card" id="identity"><h2>1. Profile Details</h2><div class="grid">
