@@ -22,15 +22,15 @@ React
 Node.js
 Linux
 Git</textarea></div>
-<div class="field"><label>Badges — one per line</label><textarea name="badges">👑 VIP
-💻 Developer
-⭐ Creator
-🎮 Gamer
-💎 Legend</textarea></div>
-<div class="field wide"><label>Projects — one per line: Title | Description | URL</label><textarea name="projects">🎮 ZYVORA ULTRA | Gaming ecosystem | https://github.com/teamzyvorax/Zyvora-Ultra
-💻 CODEVERSE | Learn • Code • Debug | https://github.com/teamzyvorax/ZYVORA-CODEVERSE
-⌨️ ZYVORA TERMINAL | Android terminal | https://github.com/teamzyvorax/ZYVORA-Terminal-v1.0
-🌐 ZYVORA DOMAINS | Domains & hosting | https://github.com/teamzyvorax/ZYVORA-DOMAINS</textarea></div>
+<div class="field"><label>Badges — one per line: Logo (emoji or image URL) | Title | Description</label><textarea name="badges">👑 | VIP | Premium community member
+💻 | Developer | Builds software and tools
+⭐ | Creator | Creates new experiences
+🎮 | Gamer | Gaming enthusiast
+💎 | Legend | ZYVORA contributor</textarea><p class="hint">Logo mein emoji ya image URL daalo. Har badge ka title aur description alag edit kar sakte ho.</p></div>
+<div class="field wide"><label>Projects — one per line: Logo (emoji or image URL) | Title | Description | Link</label><textarea name="projects">🎮 | ZYVORA ULTRA | Gaming ecosystem | https://github.com/teamzyvorax/Zyvora-Ultra
+💻 | CODEVERSE | Learn • Code • Debug | https://github.com/teamzyvorax/ZYVORA-CODEVERSE
+⌨️ | ZYVORA TERMINAL | Android terminal | https://github.com/teamzyvorax/ZYVORA-Terminal-v1.0
+🌐 | ZYVORA DOMAINS | Domains & hosting | https://github.com/teamzyvorax/ZYVORA-DOMAINS</textarea><p class="hint">Logo mein emoji ya direct image URL daalo. Har project ka title, description aur clickable link alag edit hoga.</p></div>
 <div class="field wide"><label>Role tags — one per line</label><textarea name="roles">🎮 Game Creator
 💻 Developer
 🚀 Builder
@@ -54,7 +54,7 @@ Git</textarea></div>
 </form></div></main>
 <script>
 const KEY="zyvoraProfile",DB="zyvoraMediaDB",STORE="images";
-const defaults={avatarFit:"cover",avatarPosition:"center",bannerFit:"cover",bannerPosition:"center",backgroundFit:"cover",backgroundPosition:"center",username:"arthur1_c",display:"NAGI",bio:"Building the future 🚀",about:"Developer • Gamer • Creator",status:"Online",location:"India",activity:"playing",activitySub:"Gaming Session...",github:"https://github.com/teamzyvorax",discord:"arthur1_c",discordUrl:"",youtube:"",instagram:"",website:"",twitter:"",tiktok:"",facebook:"",twitch:"",telegram:"",linkedin:"",spotify:"",footer:"ZYVORA ULTRA • Code • Create • Innovate",skills:"Python\nJavaScript\nHTML\nCSS\nReact\nNode.js\nLinux\nGit",badges:"👑 VIP\n💻 Developer\n⭐ Creator\n🎮 Gamer\n💎 Legend",projects:"🎮 ZYVORA ULTRA | Gaming ecosystem | https://github.com/teamzyvorax/Zyvora-Ultra\n💻 CODEVERSE | Learn • Code • Debug | https://github.com/teamzyvorax/ZYVORA-CODEVERSE\n⌨️ ZYVORA TERMINAL | Android terminal | https://github.com/teamzyvorax/ZYVORA-Terminal-v1.0\n🌐 ZYVORA DOMAINS | Domains & hosting | https://github.com/teamzyvorax/ZYVORA-DOMAINS",roles:"🎮 Game Creator\n💻 Developer\n🚀 Builder\n🌐 Open Source",accent:"#a855f7",bannerStyle:"minimal",glow:"on",showLocation:"yes"};
+const defaults={avatarFit:"cover",avatarPosition:"center",bannerFit:"cover",bannerPosition:"center",backgroundFit:"cover",backgroundPosition:"center",username:"arthur1_c",display:"NAGI",bio:"Building the future 🚀",about:"Developer • Gamer • Creator",status:"Online",location:"India",activity:"playing",activitySub:"Gaming Session...",github:"https://github.com/teamzyvorax",discord:"arthur1_c",discordUrl:"",youtube:"",instagram:"",website:"",twitter:"",tiktok:"",facebook:"",twitch:"",telegram:"",linkedin:"",spotify:"",footer:"ZYVORA ULTRA • Code • Create • Innovate",skills:"Python\nJavaScript\nHTML\nCSS\nReact\nNode.js\nLinux\nGit",badges:"👑 | VIP | Premium community member\n💻 | Developer | Builds software and tools\n⭐ | Creator | Creates new experiences\n🎮 | Gamer | Gaming enthusiast\n💎 | Legend | ZYVORA contributor",projects:"🎮 | ZYVORA ULTRA | Gaming ecosystem | https://github.com/teamzyvorax/Zyvora-Ultra\n💻 | CODEVERSE | Learn • Code • Debug | https://github.com/teamzyvorax/ZYVORA-CODEVERSE\n⌨️ | ZYVORA TERMINAL | Android terminal | https://github.com/teamzyvorax/ZYVORA-Terminal-v1.0\n🌐 | ZYVORA DOMAINS | Domains & hosting | https://github.com/teamzyvorax/ZYVORA-DOMAINS",roles:"🎮 Game Creator\n💻 Developer\n🚀 Builder\n🌐 Open Source",accent:"#a855f7",bannerStyle:"minimal",glow:"on",showLocation:"yes"};
 const form=document.getElementById("editor");
 function db(){return new Promise((res,rej)=>{const q=indexedDB.open(DB,1);q.onupgradeneeded=()=>q.result.createObjectStore(STORE);q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})}
 async function put(k,v){const d=await db();return new Promise((res,rej)=>{const t=d.transaction(STORE,"readwrite");t.objectStore(STORE).put(v,k);t.oncomplete=()=>{d.close();res()};t.onerror=()=>rej(t.error)})}
