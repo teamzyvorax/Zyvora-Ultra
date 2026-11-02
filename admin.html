@@ -1,28 +1,69 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#09090f"><title>ZYVORA Admin Panel</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#09090f"><title>ZYVORA Admin v2</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#09090f;color:#f4f1ff;font-family:Inter,system-ui,sans-serif}.wrap{max-width:980px;margin:36px auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:2px}.brand span{color:#b66cff}.btn{border:1px solid #8b3dff;background:#35105d;color:white;border-radius:9px;padding:11px 16px;font-weight:700;cursor:pointer;text-decoration:none}.card{background:#14121d;border:1px solid #38244f;border-radius:16px;padding:22px;margin-top:20px;box-shadow:0 12px 40px #0007}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}label{font-size:13px;color:#cbb7e8}input,textarea,select{width:100%;background:#0b0a11;color:#fff;border:1px solid #45305c;border-radius:8px;padding:12px;font:inherit}textarea{min-height:90px;resize:vertical}.wide{grid-column:1/-1}.hint{color:#a99ab9;font-size:13px;line-height:1.6}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.danger{border-color:#74405c;background:#321323}.preview{padding:14px;border-radius:12px;background:linear-gradient(120deg,#251044,#0b1930);border:1px solid #68439a}.notice{margin-top:14px;color:#8ff0bd;min-height:22px}@media(max-width:650px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.wrap{margin:10px auto;padding:12px}}
-</style></head><body><main class="wrap"><header class="top"><div class="brand">ZYVORA <span>ADMIN</span></div><a class="btn" href="index.html">View Profile ↗</a></header>
-<section class="card"><h1>Profile Editor</h1><p class="hint">Yahan se profile details edit karo. Save karne ke baad isi browser mein public profile update ho jayegi.</p>
-<form id="editor"><div class="grid">
-<div class="field"><label>Username</label><input name="username" value="arthur1_c" required></div>
-<div class="field"><label>Display name</label><input name="display" value="NAGI" required></div>
-<div class="field wide"><label>Bio</label><input name="bio" value="Building the future 🚀"></div>
-<div class="field wide"><label>About</label><textarea name="about">Developer • Gamer • Creator</textarea></div>
-<div class="field"><label>Status</label><select name="status"><option>Online</option><option>Idle</option><option>Do Not Disturb</option><option>Offline</option></select></div>
-<div class="field"><label>Activity / Currently playing</label><input name="activity" value="playing"></div>
-<div class="field wide"><label>GitHub profile URL</label><input name="github" type="url" value="https://github.com/teamzyvorax"></div>
-<div class="field"><label>Avatar photo</label><input name="avatar" type="file" accept="image/*"></div>
-<div class="field"><label>Banner style</label><select name="banner"><option value="minimal">Minimal premium</option><option value="neon">Neon purple</option></select></div>
-</div><div class="actions"><button class="btn" type="submit">Save Profile</button><button class="btn danger" type="button" id="reset">Reset Defaults</button></div><div class="notice" id="notice" role="status"></div></form></section>
-<section class="card"><h2>Important</h2><p class="hint">Yeh static GitHub Pages version local browser storage use karti hai. Changes tumhare isi browser/device par dikhenge; sab visitors aur devices par update karne ke liye secure backend + admin login/database connect karna hoga. GitHub token ya password yahan kabhi mat daalna.</p><div class="preview"><b>ZYVORA ULTRA</b><p>PROFILE CONTROL CENTER • BUILD • PLAY • CREATE</p></div></section></main>
+:root{--accent:#a855f7}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#55208055,transparent 35%),#09090f;color:#f5efff;font-family:Inter,system-ui,sans-serif}.top{position:sticky;top:0;z-index:4;background:#0b0912ee;backdrop-filter:blur(14px);border-bottom:1px solid #4b2670;padding:14px 4%;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:950;letter-spacing:3px;font-size:20px}.brand span{color:var(--accent)}.wrap{max-width:1200px;margin:26px auto;padding:0 18px}.layout{display:grid;grid-template-columns:190px 1fr;gap:18px}.nav,.card{background:#12101b;border:1px solid #39234f;border-radius:14px;padding:18px;box-shadow:0 12px 40px #0006}.nav{height:max-content;position:sticky;top:85px}.nav a{display:block;color:#d9c7f2;text-decoration:none;padding:11px;border-radius:8px;font-size:14px}.nav a:hover{background:#32134d}.card{margin-bottom:16px}.card h2{font-size:17px;margin:0 0 15px;color:#d9b5ff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field{display:flex;flex-direction:column;gap:7px;min-width:0}label{font-size:13px;color:#cbb7e8}input,textarea,select{width:100%;background:#090811;color:#fff;border:1px solid #49305f;border-radius:8px;padding:11px;font:inherit;min-width:0}textarea{min-height:105px;resize:vertical}.wide{grid-column:1/-1}.hint{font-size:12px;color:#a99ab9;line-height:1.6}.btn{border:1px solid #a855f7;background:#35105d;color:white;border-radius:9px;padding:11px 16px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}.secondary{background:#171321;border-color:#59416f}.danger{background:#351321;border-color:#87415e}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.notice{color:#9bf4c1;min-height:22px;margin-top:10px}.upload{border:1px dashed #7445a0;padding:12px;border-radius:10px}.thumb{max-width:100%;max-height:110px;object-fit:cover;border-radius:8px;margin-top:8px;display:none}.pill{display:inline-block;background:#2a1740;border:1px solid #59347c;border-radius:20px;padding:4px 9px;margin:3px;font-size:12px}.preview{border:1px solid #543277;border-radius:12px;padding:16px;background:linear-gradient(130deg,#251044,#10101a)}@media(max-width:760px){.layout{grid-template-columns:1fr}.nav{position:static;display:flex;overflow:auto;gap:3px;padding:8px}.nav a{white-space:nowrap}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.top{padding:12px 16px}}
+</style></head><body><header class="top"><div class="brand">ZYVORA <span>ADMIN v2.0</span></div><a class="btn" href="index.html">View Profile ↗</a></header>
+<main class="wrap"><div class="layout"><nav class="nav"><a href="#identity">Profile Details</a><a href="#images">Images</a><a href="#sections">Sections</a><a href="#social">Social Links</a><a href="#style">Appearance</a><a href="#save">Save / Reset</a></nav><form id="editor">
+<section class="card" id="identity"><h2>1. Profile Details</h2><div class="grid">
+<div class="field"><label>Username</label><input name="username" value="arthur1_c" required></div><div class="field"><label>Display name</label><input name="display" value="NAGI" required></div>
+<div class="field wide"><label>Bio</label><input name="bio" value="Building the future 🚀"></div><div class="field wide"><label>About Me</label><textarea name="about">Developer • Gamer • Creator</textarea></div>
+<div class="field"><label>Status</label><select name="status"><option>Online</option><option>Idle</option><option>Do Not Disturb</option><option>Offline</option></select></div><div class="field"><label>Location</label><input name="location" value="India"></div><div class="field"><label>Current activity / game</label><input name="activity" value="playing"></div><div class="field"><label>Activity subtitle</label><input name="activitySub" value="Gaming Session..."></div>
+</div></section>
+<section class="card" id="images"><h2>2. Images — Avatar, Banner & Page Background</h2><p class="hint">JPG, JPEG, PNG, WEBP aur animated GIF supported. Maximum 5 MB per image. GIF animation preserve hogi.</p><div class="grid">
+<div class="field upload"><label>Avatar image</label><input type="file" name="avatar" accept="image/png,image/jpeg,image/webp,image/gif"><img class="thumb" id="avatarThumb"></div>
+<div class="field upload"><label>Banner image</label><input type="file" name="bannerImage" accept="image/png,image/jpeg,image/webp,image/gif"><img class="thumb" id="bannerThumb"></div>
+<div class="field upload wide"><label>Full page background image</label><input type="file" name="backgroundImage" accept="image/png,image/jpeg,image/webp,image/gif"><img class="thumb" id="backgroundThumb"></div>
+</div><div class="actions"><button class="btn secondary" type="button" id="clearImages">Remove all uploaded images</button></div></section>
+<section class="card" id="sections"><h2>3. Projects, Skills & Badges</h2><div class="grid">
+<div class="field"><label>Skills — one per line</label><textarea name="skills">Python
+JavaScript
+HTML
+CSS
+React
+Node.js
+Linux
+Git</textarea></div>
+<div class="field"><label>Badges — one per line</label><textarea name="badges">👑 VIP
+💻 Developer
+⭐ Creator
+🎮 Gamer
+💎 Legend</textarea></div>
+<div class="field wide"><label>Projects — one per line: Title | Description | URL</label><textarea name="projects">🎮 ZYVORA ULTRA | Gaming ecosystem | https://github.com/teamzyvorax/Zyvora-Ultra
+💻 CODEVERSE | Learn • Code • Debug | https://github.com/teamzyvorax/ZYVORA-CODEVERSE
+⌨️ ZYVORA TERMINAL | Android terminal | https://github.com/teamzyvorax/ZYVORA-Terminal-v1.0
+🌐 ZYVORA DOMAINS | Domains & hosting | https://github.com/teamzyvorax/ZYVORA-DOMAINS</textarea></div>
+<div class="field wide"><label>Role tags — one per line</label><textarea name="roles">🎮 Game Creator
+💻 Developer
+🚀 Builder
+🌐 Open Source</textarea></div>
+</div></section>
+<section class="card" id="social"><h2>4. Social Links</h2><div class="grid">
+<div class="field"><label>GitHub URL</label><input name="github" type="url" value="https://github.com/teamzyvorax"></div><div class="field"><label>Discord username / invite</label><input name="discord" value="arthur1_c"></div>
+<div class="field"><label>YouTube URL</label><input name="youtube" type="url" placeholder="https://youtube.com/..."></div><div class="field"><label>Instagram URL</label><input name="instagram" type="url" placeholder="https://instagram.com/..."></div>
+<div class="field"><label>Website URL</label><input name="website" type="url" placeholder="https://..."></div><div class="field"><label>Footer text</label><input name="footer" value="ZYVORA ULTRA • Code • Create • Innovate"></div>
+</div></section>
+<section class="card" id="style"><h2>5. Appearance & Customization</h2><div class="grid">
+<div class="field"><label>Accent color</label><input name="accent" type="color" value="#a855f7"></div><div class="field"><label>Banner style (used when no banner image)</label><select name="bannerStyle"><option value="minimal">Minimal premium</option><option value="neon">Neon purple</option><option value="cyan">Purple + Cyan</option></select></div>
+<div class="field"><label>Profile glow</label><select name="glow"><option value="on">Neon glow</option><option value="off">No glow</option></select></div><div class="field"><label>Show location</label><select name="showLocation"><option value="yes">Yes</option><option value="no">No</option></select></div>
+</div><div class="preview" id="livePreview"><b id="pvName">NAGI</b><p id="pvBio">Building the future 🚀</p><span class="pill">Live preview updates on save</span></div></section>
+<section class="card" id="save"><h2>6. Save Changes</h2><p class="hint">Changes local browser/device par save hote hain. Shared public edits across all visitors ke liye backend + authenticated admin login zaroori hai. Browser storage clear karne se local edits delete ho sakte hain.</p><div class="actions"><button class="btn" type="submit">Save All Changes</button><button class="btn danger" type="button" id="reset">Reset Defaults</button><a class="btn secondary" href="index.html">Open Public Profile</a></div><div class="notice" id="notice" role="status"></div></section>
+</form></div></main>
 <script>
-const key="zyvoraProfile",defaults={username:"arthur1_c",display:"NAGI",bio:"Building the future 🚀",about:"Developer • Gamer • Creator",status:"Online",activity:"playing",github:"https://github.com/teamzyvorax",avatar:"",banner:"minimal"};
+const KEY="zyvoraProfile",DB="zyvoraMediaDB",STORE="images";
+const defaults={username:"arthur1_c",display:"NAGI",bio:"Building the future 🚀",about:"Developer • Gamer • Creator",status:"Online",location:"India",activity:"playing",activitySub:"Gaming Session...",github:"https://github.com/teamzyvorax",discord:"arthur1_c",youtube:"",instagram:"",website:"",footer:"ZYVORA ULTRA • Code • Create • Innovate",skills:"Python\nJavaScript\nHTML\nCSS\nReact\nNode.js\nLinux\nGit",badges:"👑 VIP\n💻 Developer\n⭐ Creator\n🎮 Gamer\n💎 Legend",projects:"🎮 ZYVORA ULTRA | Gaming ecosystem | https://github.com/teamzyvorax/Zyvora-Ultra\n💻 CODEVERSE | Learn • Code • Debug | https://github.com/teamzyvorax/ZYVORA-CODEVERSE\n⌨️ ZYVORA TERMINAL | Android terminal | https://github.com/teamzyvorax/ZYVORA-Terminal-v1.0\n🌐 ZYVORA DOMAINS | Domains & hosting | https://github.com/teamzyvorax/ZYVORA-DOMAINS",roles:"🎮 Game Creator\n💻 Developer\n🚀 Builder\n🌐 Open Source",accent:"#a855f7",bannerStyle:"minimal",glow:"on",showLocation:"yes"};
 const form=document.getElementById("editor");
-function fill(p){for(const k of Object.keys(defaults)){if(form.elements[k]&&k!=="avatar")form.elements[k].value=p[k]??defaults[k]}}
-try{fill({...defaults,...JSON.parse(localStorage.getItem(key)||"{}")})}catch(e){fill(defaults)}
-form.addEventListener("submit",async e=>{e.preventDefault();const data={};for(const k of Object.keys(defaults)){if(k!=="avatar")data[k]=form.elements[k].value.trim()}
-const file=form.elements.avatar.files[0];if(file){if(file.size>2*1024*1024){document.getElementById("notice").textContent="Image 2MB se chhoti rakho.";return}data.avatar=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}else{try{data.avatar=JSON.parse(localStorage.getItem(key)||"{}").avatar||""}catch(e){data.avatar=""}}
-localStorage.setItem(key,JSON.stringify(data));document.getElementById("notice").textContent="Saved! Ab View Profile kholo.";});
-document.getElementById("reset").addEventListener("click",()=>{localStorage.removeItem(key);fill(defaults);form.elements.avatar.value="";document.getElementById("notice").textContent="Defaults restored. Save karo.";});
+function db(){return new Promise((res,rej)=>{const q=indexedDB.open(DB,1);q.onupgradeneeded=()=>q.result.createObjectStore(STORE);q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})}
+async function put(k,v){const d=await db();return new Promise((res,rej)=>{const t=d.transaction(STORE,"readwrite");t.objectStore(STORE).put(v,k);t.oncomplete=()=>{d.close();res()};t.onerror=()=>rej(t.error)})}
+async function get(k){const d=await db();return new Promise((res,rej)=>{const q=d.transaction(STORE).objectStore(STORE).get(k);q.onsuccess=()=>{d.close();res(q.result)};q.onerror=()=>rej(q.error)})}
+async function del(k){const d=await db();return new Promise((res,rej)=>{const t=d.transaction(STORE,"readwrite");t.objectStore(STORE).delete(k);t.oncomplete=()=>{d.close();res()};t.onerror=()=>rej(t.error)})}
+function fill(p){Object.keys(defaults).forEach(k=>{if(form.elements[k])form.elements[k].value=p[k]??defaults[k]});document.getElementById("pvName").textContent=p.display||defaults.display;document.getElementById("pvBio").textContent=p.bio||defaults.bio}
+let saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}fill({...defaults,...saved});
+for(const k of ["avatar","banner","background"]){get(k).then(blob=>{if(blob){const u=URL.createObjectURL(blob),img=document.getElementById(k==="background"?"backgroundThumb":k+"Thumb");img.src=u;img.style.display="block"}}).catch(()=>{})}
+for(const k of ["display","bio"]){form.elements[k].addEventListener("input",()=>{document.getElementById(k==="display"?"pvName":"pvBio").textContent=form.elements[k].value})}
+async function upload(name,key){const file=form.elements[name].files[0];if(!file)return;if(file.size>5*1024*1024)throw new Error(name+" image 5 MB se badi hai.");const allowed=["image/jpeg","image/png","image/webp","image/gif"];if(!allowed.includes(file.type))throw new Error("Sirf JPG, PNG, WEBP ya GIF upload karein.");await put(key,file);const img=document.getElementById(key==="background"?"backgroundThumb":key+"Thumb");img.src=URL.createObjectURL(file);img.style.display="block"}
+form.addEventListener("submit",async e=>{e.preventDefault();const notice=document.getElementById("notice");notice.textContent="Saving...";try{
+for(const [field,key] of [["avatar","avatar"],["bannerImage","banner"],["backgroundImage","background"]])await upload(field,key);
+const data={};Object.keys(defaults).forEach(k=>data[k]=form.elements[k].value.trim());localStorage.setItem(KEY,JSON.stringify(data));notice.textContent="Saved successfully! Public profile ko refresh karo.";
+}catch(err){notice.textContent=err.message;notice.style.color="#ff9baf"}});
+document.getElementById("clearImages").onclick=async()=>{for(const k of ["avatar","banner","background"]){await del(k);const im=document.getElementById(k==="background"?"backgroundThumb":k+"Thumb");im.removeAttribute("src");im.style.display="none"}document.getElementById("notice").textContent="Uploaded images removed. Save changes."};
+document.getElementById("reset").onclick=async()=>{localStorage.removeItem(KEY);for(const k of ["avatar","banner","background"])await del(k);fill(defaults);for(const n of ["avatarThumb","bannerThumb","backgroundThumb"]){const im=document.getElementById(n);im.removeAttribute("src");im.style.display="none"}document.getElementById("notice").textContent="Defaults restored. Save changes."};
 </script></body></html>
