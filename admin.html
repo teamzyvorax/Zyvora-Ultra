@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#09090f"><title>ZYVORA Admin Panel</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#09090f;color:#f4f1ff;font-family:Inter,system-ui,sans-serif}.wrap{max-width:980px;margin:36px auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.brand{font-weight:900;letter-spacing:2px}.brand span{color:#b66cff}.btn{border:1px solid #8b3dff;background:#35105d;color:white;border-radius:9px;padding:11px 16px;font-weight:700;cursor:pointer;text-decoration:none}.card{background:#14121d;border:1px solid #38244f;border-radius:16px;padding:22px;margin-top:20px;box-shadow:0 12px 40px #0007}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}label{font-size:13px;color:#cbb7e8}input,textarea,select{width:100%;background:#0b0a11;color:#fff;border:1px solid #45305c;border-radius:8px;padding:12px;font:inherit}textarea{min-height:90px;resize:vertical}.wide{grid-column:1/-1}.hint{color:#a99ab9;font-size:13px;line-height:1.6}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}.danger{border-color:#74405c;background:#321323}.preview{padding:14px;border-radius:12px;background:linear-gradient(120deg,#251044,#0b1930);border:1px solid #68439a}.notice{margin-top:14px;color:#8ff0bd;min-height:22px}@media(max-width:650px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.wrap{margin:10px auto;padding:12px}}
+</style></head><body><main class="wrap"><header class="top"><div class="brand">ZYVORA <span>ADMIN</span></div><a class="btn" href="index.html">View Profile ↗</a></header>
+<section class="card"><h1>Profile Editor</h1><p class="hint">Yahan se profile details edit karo. Save karne ke baad isi browser mein public profile update ho jayegi.</p>
+<form id="editor"><div class="grid">
+<div class="field"><label>Username</label><input name="username" value="arthur1_c" required></div>
+<div class="field"><label>Display name</label><input name="display" value="NAGI" required></div>
+<div class="field wide"><label>Bio</label><input name="bio" value="Building the future 🚀"></div>
+<div class="field wide"><label>About</label><textarea name="about">Developer • Gamer • Creator</textarea></div>
+<div class="field"><label>Status</label><select name="status"><option>Online</option><option>Idle</option><option>Do Not Disturb</option><option>Offline</option></select></div>
+<div class="field"><label>Activity / Currently playing</label><input name="activity" value="playing"></div>
+<div class="field wide"><label>GitHub profile URL</label><input name="github" type="url" value="https://github.com/teamzyvorax"></div>
+<div class="field"><label>Avatar photo</label><input name="avatar" type="file" accept="image/*"></div>
+<div class="field"><label>Banner style</label><select name="banner"><option value="minimal">Minimal premium</option><option value="neon">Neon purple</option></select></div>
+</div><div class="actions"><button class="btn" type="submit">Save Profile</button><button class="btn danger" type="button" id="reset">Reset Defaults</button></div><div class="notice" id="notice" role="status"></div></form></section>
+<section class="card"><h2>Important</h2><p class="hint">Yeh static GitHub Pages version local browser storage use karti hai. Changes tumhare isi browser/device par dikhenge; sab visitors aur devices par update karne ke liye secure backend + admin login/database connect karna hoga. GitHub token ya password yahan kabhi mat daalna.</p><div class="preview"><b>ZYVORA ULTRA</b><p>PROFILE CONTROL CENTER • BUILD • PLAY • CREATE</p></div></section></main>
+<script>
+const key="zyvoraProfile",defaults={username:"arthur1_c",display:"NAGI",bio:"Building the future 🚀",about:"Developer • Gamer • Creator",status:"Online",activity:"playing",github:"https://github.com/teamzyvorax",avatar:"",banner:"minimal"};
+const form=document.getElementById("editor");
+function fill(p){for(const k of Object.keys(defaults)){if(form.elements[k]&&k!=="avatar")form.elements[k].value=p[k]??defaults[k]}}
+try{fill({...defaults,...JSON.parse(localStorage.getItem(key)||"{}")})}catch(e){fill(defaults)}
+form.addEventListener("submit",async e=>{e.preventDefault();const data={};for(const k of Object.keys(defaults)){if(k!=="avatar")data[k]=form.elements[k].value.trim()}
+const file=form.elements.avatar.files[0];if(file){if(file.size>2*1024*1024){document.getElementById("notice").textContent="Image 2MB se chhoti rakho.";return}data.avatar=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(file)})}else{try{data.avatar=JSON.parse(localStorage.getItem(key)||"{}").avatar||""}catch(e){data.avatar=""}}
+localStorage.setItem(key,JSON.stringify(data));document.getElementById("notice").textContent="Saved! Ab View Profile kholo.";});
+document.getElementById("reset").addEventListener("click",()=>{localStorage.removeItem(key);fill(defaults);form.elements.avatar.value="";document.getElementById("notice").textContent="Defaults restored. Save karo.";});
+</script></body></html>
