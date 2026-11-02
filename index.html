@@ -15,26 +15,32 @@
 <div class="headrow"><div class="name"><h1 id="displayName">NAGI <span class="verified">✦</span> <small id="username">@arthur1_c</small></h1><p><span class="dot"></span><span id="statusText">Online</span> • <span id="bioText">Building the future 🚀</span></p></div><a class="btn" id="githubButton" href="https://github.com/teamzyvorax" target="_blank" rel="noopener">View GitHub</a></div>
 <div class="grid"><div>
 <section class="panel"><h2>About Me</h2><div class="bio" id="aboutText">Developer • Gamer • Creator</div><div class="roles"><span class="role">🎮 Game Creator</span><span class="role">💻 Developer</span><span class="role">🚀 Builder</span><span class="role">🌐 Open Source</span></div></section>
-<section class="panel" id="projects" style="margin-top:18px"><h2>Projects</h2><div class="projects">
+<section class="panel" id="projects" style="margin-top:18px"><h2>Projects</h2><div class="projects" id="projectsList">
 <a class="project" href="https://github.com/teamzyvorax/Zyvora-Ultra" target="_blank"><strong>🎮 ZYVORA ULTRA</strong><span>Gaming ecosystem</span></a>
 <a class="project" href="https://github.com/teamzyvorax/ZYVORA-CODEVERSE" target="_blank"><strong>💻 CODEVERSE</strong><span>Learn • Code • Debug</span></a>
 <a class="project" href="https://github.com/teamzyvorax/ZYVORA-Terminal-v1.0" target="_blank"><strong>⌨️ ZYVORA TERMINAL</strong><span>Android terminal</span></a>
 <a class="project" href="https://github.com/teamzyvorax/ZYVORA-DOMAINS" target="_blank"><strong>🌐 ZYVORA DOMAINS</strong><span>Domains & hosting</span></a>
 </div></section></div>
 <aside><section class="panel"><h2>Currently Playing / Building</h2><div class="activity"><div class="art">⚡</div><div><strong id="activityText">playing</strong><br><small>Gaming activity</small></div></div></section>
-<section class="panel" id="skills" style="margin-top:18px"><h2>Skills</h2><div class="skills"><span class="skill">HTML</span><span class="skill">CSS</span><span class="skill">JavaScript</span><span class="skill">TypeScript</span><span class="skill">Python</span><span class="skill">Java</span><span class="skill">Kotlin</span><span class="skill">React</span><span class="skill">Linux</span><span class="skill">GitHub</span></div></section>
-<section class="panel" style="margin-top:18px"><h2>Links</h2><a class="btn" style="width:100%;text-align:center" href="https://github.com/teamzyvorax" target="_blank">GitHub ↗</a></section></aside>
-</div></div></section></main><footer class="footer">ZYVORA ULTRA • Code • Create • Innovate</footer></div>
+<section class="panel" id="skills" style="margin-top:18px"><h2>Skills</h2><div class="skills" id="skillsList"></div></section>
+<section class="panel" style="margin-top:18px"><h2>Badges</h2><div id="badgesList" class="skills"></div><h2 style="margin-top:18px">Links</h2><div id="socialLinks"></div></section></aside>
+</div></div></section></main><footer class="footer" id="footerText">ZYVORA ULTRA • Code • Create • Innovate</footer></div>
 <script>
-(function(){
- const defaults={username:"arthur1_c",display:"NAGI",bio:"Building the future 🚀",about:"Developer • Gamer • Creator",status:"Online",activity:"playing",github:"https://github.com/teamzyvorax",avatar:"",banner:"minimal"};
- let p={...defaults}; try{p={...p,...JSON.parse(localStorage.getItem("zyvoraProfile")||"{}")}}catch(e){}
- const set=(id,v)=>{const el=document.getElementById(id);if(el&&v!==undefined)el.textContent=v};
- set("displayName",p.display); set("username","@"+p.username); set("bioText",p.bio);set("aboutText",p.about);set("statusText",p.status);set("activityText",p.activity);
- const gh=document.getElementById("githubButton");if(gh)gh.href=p.github;
- const av=document.getElementById("avatarImage"),fb=document.getElementById("avatarFallback");if(p.avatar){av.src=p.avatar;av.style.display="block";fb.style.display="none"}
- const dot=document.getElementById("onlineDot");if(dot)dot.style.background=p.status.toLowerCase()==="online"?"#23a559":p.status.toLowerCase()==="idle"?"#f0b232":"#747f8d";
- const banner=document.getElementById("profileBanner");if(banner&&p.banner==="minimal")banner.style.background="radial-gradient(circle at 70% 25%,#a855f744,transparent 30%),linear-gradient(135deg,#09090f,#171322 55%,#08090d)";
-})();
-</script>
+(async()=>{const K="zyvoraProfile",DB="zyvoraMediaDB",S="images";let p={};try{p=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+const E=id=>document.getElementById(id),T=(id,v)=>{if(E(id)&&v!=null)E(id).textContent=v};
+T("displayName",p.display||"NAGI");T("username","@"+(p.username||"arthur1_c"));T("bioText",p.bio||"Building the future 🚀");T("aboutText",p.about||"Developer • Gamer • Creator");T("statusText",p.status||"Online");T("activityText",p.activity||"playing");T("footerText",p.footer||"ZYVORA ULTRA • Code • Create • Innovate");
+if(E("activityText").nextElementSibling)E("activityText").nextElementSibling.textContent=p.activitySub||"Gaming Session...";
+if(p.github)E("githubButton").href=p.github;
+document.documentElement.style.setProperty("--accent",p.accent||"#a855f7");
+const dot=E("onlineDot");if(dot)dot.style.background=p.status==="Online"?"#23a559":p.status==="Idle"?"#f0b232":p.status==="Do Not Disturb"?"#ed4245":"#747f8d";
+const banner=E("profileBanner");if(banner)banner.style.background=p.bannerStyle==="neon"?"radial-gradient(circle at 50% 50%,#9b35ff,#10051e 70%)":p.bannerStyle==="cyan"?"linear-gradient(135deg,#160b35,#073342)":"linear-gradient(135deg,#09090f,#171322 55%,#08090d)";
+if(p.glow==="off"){document.querySelector(".profile").style.boxShadow="none";E("profileAvatar").style.boxShadow="none"}
+const lines=v=>String(v||"").split(String.fromCharCode(10)).map(x=>x.trim()).filter(Boolean);
+if(p.showLocation!=="no"&&p.location){const x=document.createElement("span");x.className="role";x.textContent="📍 "+p.location;document.querySelector(".roles").append(x)}
+const skills=E("skillsList");if(skills)lines(p.skills||"HTML"+String.fromCharCode(10)+"CSS"+String.fromCharCode(10)+"JavaScript").forEach(v=>{const x=document.createElement("span");x.className="skill";x.textContent=v;skills.append(x)});
+const badges=E("badgesList");if(badges)lines(p.badges).forEach(v=>{const x=document.createElement("span");x.className="role";x.textContent=v;badges.append(x)});
+const projects=E("projectsList");if(projects&&p.projects){projects.innerHTML="";lines(p.projects).forEach(v=>{const parts=v.split("|").map(x=>x.trim()),a=parts[0],b=parts[1],c=parts[2];const x=document.createElement("a");x.className="project";x.href=(c&&c.startsWith("https://"))?c:"#";x.target="_blank";x.rel="noopener";const title=document.createElement("strong"),desc=document.createElement("span");title.textContent=a||"Project";desc.textContent=b||"";x.append(title,desc);projects.append(x)})}
+const links=E("socialLinks");if(links){[["GitHub",p.github],["YouTube",p.youtube],["Instagram",p.instagram],["Website",p.website]].forEach(([n,u])=>{if(u&&u.startsWith("https://")){const a=document.createElement("a");a.className="btn";a.style.cssText="display:block;text-align:center;margin:7px 0";a.href=u;a.target="_blank";a.rel="noopener";a.textContent=n+" ↗";links.append(a)}});if(p.discord){const x=document.createElement("div");x.className="role";x.textContent="Discord: "+p.discord;links.append(x)}}
+try{const d=await new Promise((r,j)=>{const q=indexedDB.open(DB,1);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});for(const k of ["avatar","banner","background"]){const blob=await new Promise((r,j)=>{const q=d.transaction(S).objectStore(S).get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});if(blob){const u=URL.createObjectURL(blob);if(k==="avatar"){E("avatarImage").src=u;E("avatarImage").style.display="block";E("avatarFallback").style.display="none"}if(k==="banner"){banner.style.backgroundImage="url("+u+")";banner.style.backgroundSize="cover";banner.style.backgroundPosition="center"}if(k==="background"){document.body.style.backgroundImage="linear-gradient(#08060bd9,#08060bd9),url("+u+")";document.body.style.backgroundSize="cover";document.body.style.backgroundAttachment="fixed"}}}d.close()}catch(e){console.warn(e)}
+})();</script>
 </body></html>
