@@ -55,4 +55,25 @@ const links=E("socialLinks");if(links){const logo={ "GitHub":'<path fill="curren
 };[["GitHub",p.github],["YouTube",p.youtube],["Instagram",p.instagram],["Website",p.website],["X / Twitter",p.twitter],["TikTok",p.tiktok],["Facebook",p.facebook],["Twitch",p.twitch],["Telegram",p.telegram],["LinkedIn",p.linkedin],["Spotify",p.spotify],["Discord",p.discordUrl]].forEach(([n,u])=>{if(u&&/^https:\/\//i.test(u)){const a=document.createElement("a");a.className="btn";a.style.cssText="display:inline-flex;align-items:center;gap:7px;margin:5px 6px 5px 0;padding:8px 11px;font-size:12px";a.href=u;a.target="_blank";a.rel="noopener noreferrer";const i=document.createElement("span");i.style.cssText="display:inline-flex;width:17px;height:17px;align-items:center;justify-content:center";i.innerHTML='<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true">'+(logo[n]||"")+'</svg>';a.append(i,document.createTextNode(n+" ↗"));links.append(a)}});if(p.discord){const x=document.createElement("div");x.className="role";x.textContent="Discord: "+p.discord;links.append(x)}}
 try{const d=await new Promise((r,j)=>{const q=indexedDB.open(DB,1);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});for(const k of ["avatar","banner","background"]){const blob=await new Promise((r,j)=>{const q=d.transaction(S).objectStore(S).get(k);q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});if(blob){const u=URL.createObjectURL(blob);if(k==="avatar"){E("avatarImage").src=u;E("avatarImage").style.display="block";E("avatarImage").style.objectFit=p.avatarFit||"cover";E("avatarImage").style.objectPosition=p.avatarPosition||"center";E("avatarFallback").style.display="none"}if(k==="banner"){banner.style.backgroundImage="url("+u+")";banner.style.backgroundSize=p.bannerFit==="contain"?"contain":p.bannerFit==="fill"?"100% 100%":"cover";banner.style.backgroundRepeat="no-repeat";banner.style.backgroundPosition=p.bannerPosition||"center"}if(k==="background"){document.body.style.backgroundImage="linear-gradient(#08060bd9,#08060bd9),url("+u+")";document.body.style.backgroundSize=p.backgroundFit==="contain"?"contain":p.backgroundFit==="auto"?"auto":"cover";document.body.style.backgroundPosition=p.backgroundPosition||"center";document.body.style.backgroundRepeat="no-repeat";document.body.style.backgroundAttachment="fixed"}}}d.close()}catch(e){console.warn(e)}
 })();</script>
-</body></html>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(async()=>{
+ try{
+  const sb=window.supabase.createClient("https://snujdnkuhklwudfubmez.supabase.co","sb_publishable_Srqw78m7e8k33AAActSmHQ_8YsDSvq-");
+  const {data,error}=await sb.from("site_profile").select("data").eq("id","main").maybeSingle();
+  if(error||!data?.data)return;
+  const remote=data.data, current=localStorage.getItem("zyvoraProfile");
+  const next=JSON.stringify(remote);
+  if(current!==next&&!sessionStorage.getItem("nagiCloudHydrated")){
+   localStorage.setItem("zyvoraProfile",next);sessionStorage.setItem("nagiCloudHydrated","1");location.reload();return;
+  }
+  const setImage=(id,src,fit,pos)=>{const el=document.getElementById(id);if(!el||!src)return;el.src=src;el.style.display="block";if(fit)el.style.objectFit=fit;if(pos)el.style.objectPosition=pos};
+  setImage("avatarImage",remote.avatarImageUrl,remote.avatarFit||"cover",remote.avatarPosition||"center");
+  if(remote.avatarImageUrl&&document.getElementById("avatarFallback"))document.getElementById("avatarFallback").style.display="none";
+  const banner=document.getElementById("profileBanner");
+  if(banner&&remote.bannerImageUrl){banner.style.backgroundImage="url("+JSON.stringify(remote.bannerImageUrl)+")";banner.style.backgroundSize=remote.bannerFit==="contain"?"contain":remote.bannerFit==="fill"?"100% 100%":"cover";banner.style.backgroundPosition=remote.bannerPosition||"center";}
+  if(remote.backgroundImageUrl){document.body.style.backgroundImage="linear-gradient(#08060bd9,#08060bd9),url("+JSON.stringify(remote.backgroundImageUrl)+")";document.body.style.backgroundSize=remote.backgroundFit==="contain"?"contain":remote.backgroundFit==="auto"?"auto":"cover";document.body.style.backgroundPosition=remote.backgroundPosition||"center";document.body.style.backgroundAttachment="fixed";}
+ }catch(e){console.warn("Cloud profile unavailable",e)}
+})();
+</script></body></html>
