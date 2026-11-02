@@ -2,7 +2,7 @@
 <style>
 :root{--accent:#a855f7}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0,#55208055,transparent 35%),#09090f;color:#f5efff;font-family:Inter,system-ui,sans-serif}.top{position:sticky;top:0;z-index:4;background:#0b0912ee;backdrop-filter:blur(14px);border-bottom:1px solid #4b2670;padding:14px 4%;display:flex;justify-content:space-between;align-items:center}.brand{font-weight:950;letter-spacing:3px;font-size:20px}.brand span{color:var(--accent)}.wrap{max-width:1200px;margin:26px auto;padding:0 18px}.layout{display:grid;grid-template-columns:190px 1fr;gap:18px}.nav,.card{background:#12101b;border:1px solid #39234f;border-radius:14px;padding:18px;box-shadow:0 12px 40px #0006}.nav{height:max-content;position:sticky;top:85px}.nav a{display:block;color:#d9c7f2;text-decoration:none;padding:11px;border-radius:8px;font-size:14px}.nav a:hover{background:#32134d}.card{margin-bottom:16px}.card h2{font-size:17px;margin:0 0 15px;color:#d9b5ff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field{display:flex;flex-direction:column;gap:7px;min-width:0}label{font-size:13px;color:#cbb7e8}input,textarea,select{width:100%;background:#090811;color:#fff;border:1px solid #49305f;border-radius:8px;padding:11px;font:inherit;min-width:0}textarea{min-height:105px;resize:vertical}.wide{grid-column:1/-1}.hint{font-size:12px;color:#a99ab9;line-height:1.6}.btn{border:1px solid #a855f7;background:#35105d;color:white;border-radius:9px;padding:11px 16px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}.secondary{background:#171321;border-color:#59416f}.danger{background:#351321;border-color:#87415e}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.notice{color:#9bf4c1;min-height:22px;margin-top:10px}.upload{border:1px dashed #7445a0;padding:12px;border-radius:10px}.thumb{max-width:100%;max-height:110px;object-fit:cover;border-radius:8px;margin-top:8px;display:none}.pill{display:inline-block;background:#2a1740;border:1px solid #59347c;border-radius:20px;padding:4px 9px;margin:3px;font-size:12px}.preview{border:1px solid #543277;border-radius:12px;padding:16px;background:linear-gradient(130deg,#251044,#10101a)}@media(max-width:760px){.layout{grid-template-columns:1fr}.nav{position:static;display:flex;overflow:auto;gap:3px;padding:8px}.nav a{white-space:nowrap}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.top{padding:12px 16px}}
 </style></head><body><header class="top"><div class="brand">ZYVORA <span>ADMIN v2.0</span></div><a class="btn" href="index.html">View Profile ↗</a></header>
-<main class="wrap"><div class="layout"><nav class="nav"><a href="#identity">Profile Details</a><a href="#images">Images</a><a href="#sections">Sections</a><a href="#social">Social Links</a><a href="#style">Appearance</a><a href="#save">Save / Reset</a></nav><form id="editor">
+<main class="wrap"><div class="layout"><nav class="nav"><a href="#identity">Profile Details</a><a href="#images">Images</a><a href="#sections">Sections</a><a href="#social">Social Links</a><a href="#style">Appearance</a><a href="#save">Save / Reset</a></nav><section class="card" id="cloudAuth"><h2>Secure Cloud Admin Login</h2><p class="hint">Sign in with your admin email. New account signup is available; an account must be approved in the database before it can edit the public profile.</p><div class="grid"><div class="field"><label>Email</label><input id="cloudEmail" type="email" autocomplete="username" required></div><div class="field"><label>Password</label><input id="cloudPassword" type="password" autocomplete="current-password" required></div></div><div class="actions"><button class="btn" id="cloudLogin" type="button">Sign in</button><button class="btn secondary" id="cloudSignup" type="button">Create account</button><button class="btn danger" id="cloudLogout" type="button" hidden>Sign out</button></div><div class="notice" id="cloudNotice" role="status"></div></section><form id="editor" style="display:none">
 <section class="card" id="identity"><h2>1. Profile Details</h2><div class="grid">
 <div class="field"><label>Username</label><input name="username" value="arthur1_c" required></div><div class="field"><label>Display name</label><input name="display" value="NAGI" required></div>
 <div class="field wide"><label>Bio</label><input name="bio" value="Building the future 🚀"></div><div class="field wide"><label>About Me</label><textarea name="about">Developer • Gamer • Creator</textarea></div>
@@ -50,7 +50,7 @@ Git</textarea></div>
 <div class="field"><label>Accent color</label><input name="accent" type="color" value="#a855f7"></div><div class="field"><label>Banner style (used when no banner image)</label><select name="bannerStyle"><option value="minimal">Minimal premium</option><option value="neon">Neon purple</option><option value="cyan">Purple + Cyan</option></select></div>
 <div class="field"><label>Profile glow</label><select name="glow"><option value="on">Neon glow</option><option value="off">No glow</option></select></div><div class="field"><label>Show location</label><select name="showLocation"><option value="yes">Yes</option><option value="no">No</option></select></div>
 </div><div class="preview" id="livePreview"><b id="pvName">NAGI</b><p id="pvBio">Building the future 🚀</p><span class="pill">Live preview updates on save</span></div></section>
-<section class="card" id="save"><h2>6. Save Changes</h2><p class="hint">Changes local browser/device par save hote hain. Shared public edits across all visitors ke liye backend + authenticated admin login zaroori hai. Browser storage clear karne se local edits delete ho sakte hain.</p><div class="actions"><button class="btn" type="submit">Save All Changes</button><button class="btn danger" type="button" id="reset">Reset Defaults</button><a class="btn secondary" href="index.html">Open Public Profile</a></div><div class="notice" id="notice" role="status"></div></section>
+<section class="card" id="save"><h2>6. Save Changes</h2><p class="hint">Cloud save: changes are stored centrally and appear to all visitors. Only approved admin accounts can save.</p><div class="actions"><button class="btn" type="submit">Save All Changes</button><button class="btn danger" type="button" id="reset">Reset Defaults</button><a class="btn secondary" href="index.html">Open Public Profile</a></div><div class="notice" id="notice" role="status"></div></section>
 </form></div></main>
 <script>
 const KEY="zyvoraProfile",DB="zyvoraMediaDB",STORE="images";
@@ -71,4 +71,48 @@ const data={};Object.keys(defaults).forEach(k=>data[k]=form.elements[k].value.tr
 }catch(err){notice.textContent=err.message;notice.style.color="#ff9baf"}});
 document.getElementById("clearImages").onclick=async()=>{for(const k of ["avatar","banner","background"]){await del(k);const im=document.getElementById(k==="background"?"backgroundThumb":k+"Thumb");im.removeAttribute("src");im.style.display="none"}document.getElementById("notice").textContent="Uploaded images removed. Save changes."};
 document.getElementById("reset").onclick=async()=>{localStorage.removeItem(KEY);for(const k of ["avatar","banner","background"])await del(k);fill(defaults);for(const n of ["avatarThumb","bannerThumb","backgroundThumb"]){const im=document.getElementById(n);im.removeAttribute("src");im.style.display="none"}document.getElementById("notice").textContent="Defaults restored. Save changes."};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(async()=>{
+ const sb=window.supabase.createClient("https://snujdnkuhklwudfubmez.supabase.co","sb_publishable_Srqw78m7e8k33AAActSmHQ_8YsDSvq-");
+ const form=document.getElementById("editor"), auth=document.getElementById("cloudAuth"), note=document.getElementById("cloudNotice");
+ const say=(s,bad=false)=>{note.textContent=s;note.style.color=bad?"#ff9baf":"#9bf4c1"};
+ const email=()=>document.getElementById("cloudEmail").value.trim(), password=()=>document.getElementById("cloudPassword").value;
+ async function refresh(){
+  const {data:{session}}=await sb.auth.getSession();
+  document.getElementById("cloudLogout").hidden=!session;
+  if(!session){form.style.display="none";say("Sign in to load the shared profile.");return}
+  const {data,error}=await sb.from("site_profile").select("data").eq("id","main").maybeSingle();
+  if(error){form.style.display="none";say(error.message.includes("permission")||error.code==="42501"?"Account is not approved as an admin yet. Ask the owner to approve this account.":error.message,true);return}
+  if(data?.data){localStorage.setItem("zyvoraProfile",JSON.stringify(data.data));fill({...defaults,...data.data})}
+  form.style.display="block";say("Signed in. Cloud profile loaded.");
+ }
+ document.getElementById("cloudLogin").onclick=async()=>{say("Signing in...");const {error}=await sb.auth.signInWithPassword({email:email(),password:password()});if(error)say(error.message,true);else await refresh()};
+ document.getElementById("cloudSignup").onclick=async()=>{say("Creating account...");const {data,error}=await sb.auth.signUp({email:email(),password:password()});if(error)say(error.message,true);else say(data.session?"Account created. Owner approval is still required.":"Signup submitted. Check your email to confirm, then ask the owner to approve your account.")};
+ document.getElementById("cloudLogout").onclick=async()=>{await sb.auth.signOut();form.style.display="none";say("Signed out.")};
+ form.addEventListener("submit",async e=>{
+  e.preventDefault();e.stopImmediatePropagation();
+  say("Uploading changes to cloud...");
+  try{
+   const data={};Object.keys(defaults).forEach(k=>data[k]=form.elements[k].value.trim());
+   const {data:{user}}=await sb.auth.getUser();if(!user)throw new Error("Please sign in again.");
+   for(const [field,keyName] of [["avatar","avatar"],["bannerImage","banner"],["backgroundImage","background"]]){
+    const file=form.elements[field].files[0];if(!file)continue;
+    if(file.size>25*1024*1024)throw new Error(field+" image exceeds 25 MB.");
+    if(!["image/jpeg","image/png","image/webp","image/gif"].includes(file.type))throw new Error("Use JPG, PNG, WEBP or GIF.");
+    const path=user.id+"/"+keyName+"-"+Date.now()+"-"+file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+    const {error:upErr}=await sb.storage.from("profile-media").upload(path,file,{upsert:true,contentType:file.type});
+    if(upErr)throw upErr;
+    const {data:pub}=sb.storage.from("profile-media").getPublicUrl(path);
+    data[keyName+"ImageUrl"]=pub.publicUrl;
+   }
+   const {error}=await sb.from("site_profile").upsert({id:"main",data,updated_at:new Date().toISOString()},{onConflict:"id"});
+   if(error)throw error;
+   localStorage.setItem("zyvoraProfile",JSON.stringify(data));
+   say("Saved to cloud successfully. All visitors will see the updated profile.");
+  }catch(err){say(err.message||"Cloud save failed.",true)}
+ },true);
+ await refresh();
+})();
 </script></body></html>
